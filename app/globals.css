@@ -35,3 +35,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Swiper Custom Styles */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #FFCC00 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #FFCC00 !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: #000000 !important;
+  opacity: 0.5;
+}

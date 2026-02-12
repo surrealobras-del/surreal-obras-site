@@ -30,3 +30,32 @@ export async function exemploInserirDados(dados: any) {
   
   return data
 }
+
+// Exemplo: Buscar obras/portfolio
+export async function buscarObras() {
+  const { data, error } = await supabase
+    .from('obras')
+    .select('*')
+    .order('created_at', { ascending: false })
+  
+  if (error) {
+    console.error('Erro ao buscar obras:', error)
+    return []
+  }
+  
+  return data || []
+}
+
+// Exemplo: Upload de imagem para Storage
+export async function uploadImagem(file: File, path: string) {
+  const { data, error } = await supabase.storage
+    .from('project')
+    .upload(path, file)
+  
+  if (error) {
+    console.error('Erro ao fazer upload:', error)
+    return null
+  }
+  
+  return data
+}

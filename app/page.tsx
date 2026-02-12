@@ -1,9 +1,23 @@
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import WhatsAppButton from '@/components/WhatsAppButton'
+import Hero from '@/components/sections/Hero'
+import About from '@/components/sections/About'
+import Team from '@/components/sections/Team'
+import Services from '@/components/sections/Services'
+import Portfolio from '@/components/sections/Portfolio'
+
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <h1 className="text-4xl font-bold text-center p-8">
-        Surreal Construções e Reformas
-      </h1>
+      <Header />
+      <Hero />
+      <About />
+      <Team />
+      <Services />
+      <Portfolio />
+      <Footer />
+      <WhatsAppButton />
     </main>
-  );
+  )
 }
