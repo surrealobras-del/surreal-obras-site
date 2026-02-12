@@ -1,33 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Users, Award, Briefcase, CheckCircle } from 'lucide-react'
 import Image from 'next/image'
-import { Card, CardContent } from '@/components/ui/card'
 
 const Team = () => {
-  const specialties = [
-    {
-      icon: Briefcase,
-      title: 'Engenheiros',
-      description: 'Profissionais formados e experientes',
-    },
-    {
-      icon: Users,
-      title: 'Arquiteto',
-      description: 'Design e planejamento especializado',
-    },
-    {
-      icon: Award,
-      title: 'Mestres de Obra',
-      description: 'Experiência prática e conhecimento técnico',
-    },
-    {
-      icon: CheckCircle,
-      title: 'Especialistas',
-      description: 'Profissionais qualificados em cada área',
-    },
-  ]
 
   return (
     <section id="equipe" className="py-20 bg-gray-50">
@@ -108,36 +84,6 @@ const Team = () => {
               className="object-cover"
             />
           </motion.div>
-        </div>
-
-        {/* Cards de Especialidades */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {specialties.map((specialty, index) => {
-            const Icon = specialty.icon
-            return (
-              <motion.div
-                key={specialty.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-              >
-                <Card className="h-full hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6 text-center">
-                    <div className="flex justify-center mb-4">
-                      <div className="bg-primary/10 p-4 rounded-full">
-                        <Icon className="text-primary" size={32} />
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-secondary mb-2">
-                      {specialty.title}
-                    </h3>
-                    <p className="text-gray-600">{specialty.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )
-          })}
         </div>
       </div>
     </section>

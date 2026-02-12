@@ -273,28 +273,6 @@ export default function ObraPage() {
               </div>
             </motion.section>
           )}
-
-          {/* Botão de Contato */}
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="text-center mt-12"
-          >
-            <Button
-              asChild
-              size="lg"
-              className="bg-primary text-secondary hover:bg-primary/90 text-lg px-8 py-6"
-            >
-              <a
-                href="https://wa.me/554599883622?text=Olá! Gostaria de saber mais sobre esta obra."
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Solicitar Orçamento
-              </a>
-            </Button>
-          </motion.section>
         </article>
       </div>
       <Footer />
