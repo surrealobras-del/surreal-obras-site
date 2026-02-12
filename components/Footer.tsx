@@ -97,14 +97,6 @@ const Footer = () => {
                   Obras
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="#contato"
-                  className="text-gray-300 hover:text-primary transition-colors"
-                >
-                  Contato
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -114,11 +106,16 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin className="text-primary mt-1 flex-shrink-0" size={20} />
-                <span className="text-gray-300">
+                <Link
+                  href="https://www.google.com/maps/search/?api=1&query=R.+Cuiabá,+4570+-+Alto+Alegre,+Cascavel+-+PR,+85805-260"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-primary transition-colors"
+                >
                   R. Cuiabá, 4570 - Alto Alegre
                   <br />
                   Cascavel - PR, 85805-260
-                </span>
+                </Link>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="text-primary flex-shrink-0" size={20} />
