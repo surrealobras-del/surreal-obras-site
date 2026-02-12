@@ -75,26 +75,27 @@ const Portfolio = () => {
             <p className="text-gray-600">Nenhuma obra encontrada.</p>
           </div>
         ) : (
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={30}
-            slidesPerView={1}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            }}
-            navigation
-            pagination={{ clickable: true }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            className="pb-12"
-          >
+          <div className="overflow-hidden">
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={30}
+              slidesPerView={1}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              }}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              className="pb-12"
+            >
             {obras.map((obra) => (
               <SwiperSlide key={obra.id}>
                 <Link href={`/obra/${obra.id}`}>
@@ -103,7 +104,7 @@ const Portfolio = () => {
                       {obra.main_image ? (
                         <Image
                           src={obra.main_image}
-                          alt={obra.title}
+                          alt={`Projeto ${obra.title} - Surreal Construções e Reformas`}
                           fill
                           className="object-cover"
                           unoptimized
@@ -118,18 +119,13 @@ const Portfolio = () => {
                       <h3 className="text-xl font-bold text-secondary mb-2">
                         {obra.title}
                       </h3>
-                      <p className="text-gray-500 text-sm">
-                        {new Date(obra.created_at).toLocaleDateString('pt-BR', {
-                          year: 'numeric',
-                          month: 'long',
-                        })}
-                      </p>
                     </CardContent>
                   </Card>
                 </Link>
               </SwiperSlide>
             ))}
-          </Swiper>
+            </Swiper>
+          </div>
         )}
       </div>
     </section>

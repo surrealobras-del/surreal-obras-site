@@ -16,7 +16,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <Image
           src="https://gukpisxmjvmfukxhkmrt.supabase.co/storage/v1/object/public/project/banner_site.png"
-          alt="Banner Surreal Construções e Reformas"
+          alt="Surreal Construções e Reformas - Construção e reformas em Cascavel, PR"
           fill
           className="object-cover"
           priority
@@ -45,7 +45,7 @@ const Hero = () => {
             className="text-xl md:text-2xl text-white mb-8 drop-shadow-md"
           >
             Transformando sonhos em realidade através de construções e reformas
-            de qualidade
+            de qualidade em Cascavel, PR
           </motion.p>
 
           <motion.div

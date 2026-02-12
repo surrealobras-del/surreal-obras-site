@@ -31,8 +31,19 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    max-width: 100vw;
+    position: relative;
+  }
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
   }
 }
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowLeft, MapPin, Calendar, Play } from 'lucide-react'
+import { ArrowLeft, MapPin, Play } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { getObraById, type ObraDetalhes } from '@/lib/obras'
 import Header from '@/components/Header'
@@ -84,16 +84,51 @@ export default function ObraPage() {
     )
   }
 
+  // Structured data para a obra
+  const obraStructuredData = obra ? (() => {
+    const data: any = {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": obra.title,
+      "description": obra.description || `Projeto de construção/reforma: ${obra.title}`,
+      "creator": {
+        "@type": "Organization",
+        "name": "Surreal Construções e Reformas",
+        "url": process.env.NEXT_PUBLIC_SITE_URL || "https://surreal-obras-site.vercel.app"
+      },
+      "dateCreated": obra.created_at
+    }
+    
+    if (obra.images && obra.images.length > 0) {
+      data.image = obra.images[0].url
+    }
+    
+    if (obra.address) {
+      data.location = {
+        "@type": "Place",
+        "address": obra.address
+      }
+    }
+    
+    return data
+  })() : null
+
   return (
     <main className="min-h-screen">
+      {obraStructuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(obraStructuredData) }}
+        />
+      )}
       <Header />
-      <div className="pt-20">
+      <div className="pt-24">
         {/* Botão Voltar */}
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-2">
           <Button
             onClick={() => router.back()}
             variant="ghost"
-            className="mb-4"
+            className="mb-2"
           >
             <ArrowLeft className="mr-2" size={20} />
             Voltar
@@ -105,7 +140,7 @@ export default function ObraPage() {
           <div className="relative h-[60vh] w-full mb-8">
             <Image
               src={obra.images[0].url}
-              alt={obra.title}
+              alt={`${obra.title} - Projeto Surreal Construções e Reformas`}
               fill
               className="object-cover"
               priority
@@ -118,6 +153,7 @@ export default function ObraPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-4xl md:text-6xl font-bold mb-4"
+                  itemProp="name"
                 >
                   {obra.title}
                 </motion.h1>
@@ -129,16 +165,6 @@ export default function ObraPage() {
                     </div>
                   )}
                   <div className="flex items-center gap-2">
-                    <Calendar size={18} />
-                    <span>
-                      {new Date(obra.created_at).toLocaleDateString('pt-BR', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
                     <span className="px-3 py-1 bg-primary text-secondary rounded-full font-semibold">
                       {obra.status === 'completed' ? 'Concluída' : 'Em Andamento'}
                     </span>
@@ -149,10 +175,10 @@ export default function ObraPage() {
           </div>
         )}
 
-        <div className="container mx-auto px-4 pb-20">
+        <article className="container mx-auto px-4 pb-20" itemScope itemType="https://schema.org/CreativeWork">
           {/* Descrição */}
           {obra.description && (
-            <motion.div
+            <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -162,19 +188,20 @@ export default function ObraPage() {
                 Sobre o Projeto
               </h2>
               <div className="w-24 h-1 bg-primary mb-6"></div>
-              <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-line">
+              <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-line" itemProp="description">
                 {obra.description}
               </p>
-            </motion.div>
+            </motion.section>
           )}
 
           {/* Galeria de Imagens */}
           {obra.images && obra.images.length > 1 && (
-            <motion.div
+            <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mb-12"
+              className="mb-12 overflow-hidden"
+              aria-label="Galeria de imagens do projeto"
             >
               <h2 className="text-3xl font-bold text-secondary mb-6 text-center">
                 Galeria de Imagens
@@ -204,7 +231,7 @@ export default function ObraPage() {
                     <div className="relative h-80 w-full rounded-lg overflow-hidden">
                       <Image
                         src={image.url}
-                        alt={`${obra.title} - Imagem ${image.order}`}
+                        alt={`${obra.title} - Imagem ${image.order} - Galeria do projeto Surreal Construções e Reformas`}
                         fill
                         className="object-cover"
                         unoptimized
@@ -213,16 +240,17 @@ export default function ObraPage() {
                   </SwiperSlide>
                 ))}
               </Swiper>
-            </motion.div>
+            </motion.section>
           )}
 
           {/* Vídeos */}
           {obra.videos && obra.videos.length > 0 && (
-            <motion.div
+            <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
               className="mb-12"
+              aria-label="Vídeos do projeto"
             >
               <h2 className="text-3xl font-bold text-secondary mb-6 text-center">
                 Vídeos
@@ -243,11 +271,11 @@ export default function ObraPage() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </motion.section>
           )}
 
           {/* Botão de Contato */}
-          <motion.div
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
@@ -266,8 +294,8 @@ export default function ObraPage() {
                 Solicitar Orçamento
               </a>
             </Button>
-          </motion.div>
-        </div>
+          </motion.section>
+        </article>
       </div>
       <Footer />
     </main>

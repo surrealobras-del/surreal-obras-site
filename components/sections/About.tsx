@@ -56,7 +56,7 @@ const About = () => {
           >
             <Image
               src="https://gukpisxmjvmfukxhkmrt.supabase.co/storage/v1/object/public/project/sobre_nos_site.png"
-              alt="Sobre a Surreal Construções e Reformas"
+              alt="Equipe Surreal Construções e Reformas - Empresa de construção e reformas em Cascavel, PR"
               fill
               className="object-cover"
             />
@@ -74,7 +74,7 @@ const About = () => {
               Transformando Sonhos em Realidade
             </h3>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Com <strong className="text-primary">15 anos de experiência</strong> no mercado, a Surreal Construções e Reformas é uma empresa especializada em transformar espaços e realizar sonhos.
+              Com <strong className="text-primary">15 anos de experiência</strong> no mercado, a Surreal Construções e Reformas é uma empresa de <strong className="text-primary">Cascavel, PR</strong> especializada em transformar espaços e realizar sonhos.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               Trabalhamos com <strong className="text-primary">reformas e construção</strong>, oferecendo soluções completas sempre priorizando qualidade, prazo e satisfação do cliente.

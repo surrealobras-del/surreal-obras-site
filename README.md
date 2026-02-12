@@ -96,9 +96,46 @@ surreal-obras-site/
 └── public/              # Arquivos estáticos
 ```
 
+## 🚀 Deploy na Vercel
+
+### Pré-requisitos
+
+1. Conta na [Vercel](https://vercel.com)
+2. Repositório conectado ao GitHub
+
+### Passos para Deploy
+
+1. **Conecte o repositório:**
+   - Acesse [vercel.com](https://vercel.com)
+   - Clique em "Add New Project"
+   - Importe o repositório `surrealobras-del/surreal-obras-site`
+
+2. **Configure as variáveis de ambiente:**
+   - Na página de configuração do projeto, vá em "Environment Variables"
+   - Adicione as seguintes variáveis:
+     ```
+     NEXT_PUBLIC_SUPABASE_URL=https://gukpisxmjvmfukxhkmrt.supabase.co
+     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_8rgC3KL03MLP_bKd76ciCA_X0M63Y-p
+     ```
+
+3. **Configure o projeto:**
+   - Framework Preset: Next.js
+   - Build Command: `npm run build` (automático)
+   - Output Directory: `.next` (automático)
+   - Install Command: `npm install` (automático)
+
+4. **Deploy:**
+   - Clique em "Deploy"
+   - A Vercel fará o build e deploy automaticamente
+
+### Após o Deploy
+
+- O site estará disponível em uma URL como: `https://surreal-obras-site.vercel.app`
+- Cada push para a branch `main` fará um novo deploy automaticamente
+- Você pode configurar um domínio personalizado nas configurações do projeto
+
 ## 🎯 Próximos Passos
 
-- Integrar imagens reais das obras do Supabase
-- Adicionar sistema de gerenciamento de conteúdo
-- Implementar formulário de contato com Supabase
+- Configurar domínio personalizado
 - Adicionar mais animações e interatividade
+- Otimizar performance e SEO

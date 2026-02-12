@@ -3,11 +3,14 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const Header = () => {
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -18,6 +21,10 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Na página inicial, o header pode ser transparente quando não há scroll
+  // Em outras páginas, sempre mostrar fundo branco
+  const shouldShowBackground = !isHomePage || isScrolled
 
   const navItems = [
     { name: 'Início', href: '#inicio' },
@@ -31,7 +38,7 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        shouldShowBackground
           ? 'bg-white shadow-md py-2'
           : 'bg-transparent py-4'
       }`}
@@ -46,7 +53,7 @@ const Header = () => {
               width={150}
               height={60}
               className={`h-12 w-auto object-contain transition-all duration-300 ${
-                isScrolled ? '' : 'brightness-0 invert'
+                shouldShowBackground ? '' : 'brightness-0 invert'
               }`}
               priority
             />
@@ -59,7 +66,7 @@ const Header = () => {
                 key={item.name}
                 href={item.href}
                 className={`transition-colors font-medium ${
-                  isScrolled
+                  shouldShowBackground
                     ? 'text-secondary hover:text-primary'
                     : 'text-white hover:text-primary'
                 }`}
@@ -84,7 +91,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             className={`md:hidden transition-colors ${
-              isScrolled ? 'text-secondary' : 'text-white'
+              shouldShowBackground ? 'text-secondary' : 'text-white'
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
