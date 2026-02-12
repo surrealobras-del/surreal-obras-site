@@ -79,9 +79,7 @@ export const metadata: Metadata = {
     apple: "https://gukpisxmjvmfukxhkmrt.supabase.co/storage/v1/object/public/project/fivicon.jpg",
   },
   verification: {
-    // Adicione aqui códigos de verificação quando disponíveis
-    // google: "seu-codigo-google",
-    // yandex: "seu-codigo-yandex",
+    google: "f6qe4pxYunbh6y1FASThVp7aqC4n9KW-vTWIZPDa_3c",
   },
 };
 
